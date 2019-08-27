@@ -3,7 +3,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import { Text, View, AsyncStorage } from 'react-native';
+import { Text, View, AsyncStorage, TouchableOpacity } from 'react-native';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import ApolloClient from 'apollo-boost';
@@ -32,8 +32,9 @@ export default function App() {
 				cache,
 				...apolloClientOptions
 			});
+
 			const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
-			if (isLoggedIn === null || isLoggedIn === false) {
+			if (isLoggedIn === null || isLoggedIn === 'false') {
 				setIsLoggedIn(false);
 			} else {
 				setIsLoggedIn(true);
@@ -50,13 +51,41 @@ export default function App() {
 		preLoad();
 	}, []);
 
+	const logUserIn = async () => {
+		try {
+			await AsyncStorage.setItem('isLoggedIn', 'true');
+			setIsLoggedIn(true);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const logUserOut = async () => {
+		try {
+			await AsyncStorage.setItem('isLoggedIn', 'false');
+			setIsLoggedIn(false);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	// Once component is mounted, loaded is false and client is null
 	// Then, go to AppLoading
 	return loaded && client && isLoggedIn !== null ? (
 		<ApolloProvider client={client}>
 			<ThemeProvider theme={styles}>
-				<View>
-					{isLoggedIn === true ? <Text>I'm in</Text> : <Text>I'm out</Text>}
+				<View
+					style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+				>
+					{isLoggedIn === true ? (
+						<TouchableOpacity onPress={logUserOut}>
+							<Text>Log Out</Text>
+						</TouchableOpacity>
+					) : (
+						<TouchableOpacity onPress={logUserIn}>
+							<Text>Log In</Text>
+						</TouchableOpacity>
+					)}
 				</View>
 			</ThemeProvider>
 		</ApolloProvider>
