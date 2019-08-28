@@ -17,3 +17,4 @@ Screens:
 - Asset: https://docs.expo.io/versions/v30.0.0/sdk/asset/
 - Expo Vector Icon: https://github.com/expo/vector-icons
 - Apollo Cache Persist: https://github.com/apollographql/apollo-cache-persist
+- React Navigation: https://reactnavigation.org/docs/en/stack-navigator.html
