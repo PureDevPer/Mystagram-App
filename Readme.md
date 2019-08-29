@@ -21,3 +21,4 @@ Screens:
 - TextInput: https://facebook.github.io/react-native/docs/textinput
 - Expo - Facebook: https://docs.expo.io/versions/latest/sdk/facebook/
 - Expo - Google: https://docs.expo.io/versions/latest/sdk/google/
+- Expo - Icons: https://docs.expo.io/versions/latest/guides/icons/
