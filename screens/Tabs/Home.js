@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Loader from '../../components/Loader';
 import { gql } from 'apollo-boost';
 import { useQuery } from 'react-apollo-hooks';
+import { ScrollView, RefreshControl } from 'react-native';
 
 const FEED_QUERY = gql`
 	{
@@ -40,8 +41,28 @@ const View = styled.View`
 	flex: 1;
 `;
 
+const Text = styled.Text``;
+
 export default () => {
-	const { loading, data } = useQuery(FEED_QUERY);
-	console.log(loading, data);
-	return <View>{loading ? <Loader /> : null}</View>;
+	const [refreshing, setRefreshing] = useState(false);
+	const { loading, data, refetch } = useQuery(FEED_QUERY);
+	const refresh = async () => {
+		try {
+			setRefreshing(true);
+			await refetch();
+		} catch (error) {
+			console.log(error);
+		} finally {
+			setRefreshing(false);
+		}
+	};
+	return (
+		<ScrollView
+			refreshControl={
+				<RefreshControl refreshing={refreshing} onRefresh={refresh} />
+			}
+		>
+			{loading ? <Loader /> : <Text>Hello</Text>}
+		</ScrollView>
+	);
 };
