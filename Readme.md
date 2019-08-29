@@ -23,3 +23,4 @@ Screens:
 - Expo - Google: https://docs.expo.io/versions/latest/sdk/google/
 - Expo - Icons: https://docs.expo.io/versions/latest/guides/icons/
 - Expo icons: https://expo.github.io/vector-icons/
+- React Native Swiper: https://github.com/leecade/react-native-swiper
