@@ -4,7 +4,7 @@ import {
 	createStackNavigator
 } from 'react-navigation';
 import Home from '../screens/Tabs/Home';
-import Search from '../screens/Tabs/Search';
+import Search from '../screens/Tabs/Search/SearchContainer';
 import Notifications from '../screens/Tabs/Notifications';
 import Profile from '../screens/Tabs/Profile';
 import MessagesLink from '../components/MessagesLink';
