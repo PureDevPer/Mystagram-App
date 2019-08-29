@@ -22,3 +22,4 @@ Screens:
 - Expo - Facebook: https://docs.expo.io/versions/latest/sdk/facebook/
 - Expo - Google: https://docs.expo.io/versions/latest/sdk/google/
 - Expo - Icons: https://docs.expo.io/versions/latest/guides/icons/
+- Expo icons: https://expo.github.io/vector-icons/
