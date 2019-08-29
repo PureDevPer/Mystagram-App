@@ -13,6 +13,7 @@ import { View, Platform } from 'react-native';
 import NavIcon from '../components/NavIcon';
 import { stackStyles } from './config';
 import styles from '../styles';
+import UserDetail from '../screens/UserDetail';
 
 const stackFactory = (initialRoute, customConfig) =>
 	createStackNavigator(
@@ -26,13 +27,20 @@ const stackFactory = (initialRoute, customConfig) =>
 			Detail: {
 				screen: Detail,
 				navigationOptions: {
-					headerTintColor: styles.blackColor,
 					title: 'Photo'
+				}
+			},
+			UserDetail: {
+				screen: UserDetail,
+				navigationOptions: {
+					title: 'User'
 				}
 			}
 		},
 		{
 			defaultNavigationOptions: {
+				headerBackTitle: null,
+				headerTintColor: styles.blackColor,
 				headerStyle: { ...stackStyles }
 			}
 		}
@@ -119,7 +127,7 @@ export default createBottomTabNavigator(
 		}
 	},
 	{
-		initialRouteName: 'Search',
+		initialRouteName: 'Profile',
 		tabBarOptions: {
 			showLabel: false,
 			style: {
