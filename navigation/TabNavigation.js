@@ -15,7 +15,10 @@ const stackFactory = (initialRoute, customConfig) =>
 	createStackNavigator({
 		InitialRoute: {
 			screen: initialRoute,
-			navigationOptions: { ...customConfig }
+			navigationOptions: {
+				...customConfig,
+				headerStyle: { backgroundColor: '#EFEEEF' }
+			}
 		}
 	});
 
@@ -27,8 +30,11 @@ export default createBottomTabNavigator(
 				headerTitle: <NavIcon name="logo-instagram" size={36} />
 			}),
 			navigationOptions: {
-				tabBarIcon: (
-					<NavIcon name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'} />
+				tabBarIcon: ({ focused }) => (
+					<NavIcon
+						focused={focused}
+						name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
+					/>
 				)
 			}
 		},
@@ -37,8 +43,11 @@ export default createBottomTabNavigator(
 				title: 'Search'
 			}),
 			navigationOptions: {
-				tabBarIcon: (
-					<NavIcon name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'} />
+				tabBarIcon: ({ focused }) => (
+					<NavIcon
+						focused={focused}
+						name={Platform.OS === 'ios' ? 'ios-search' : 'md-search'}
+					/>
 				)
 			}
 		},
@@ -63,8 +72,19 @@ export default createBottomTabNavigator(
 				title: 'Notifications'
 			}),
 			navigationOptions: {
-				tabBarIcon: (
-					<NavIcon name={Platform.OS === 'ios' ? 'ios-heart' : 'md-heart'} />
+				tabBarIcon: ({ focused }) => (
+					<NavIcon
+						focused={focused}
+						name={
+							Platform.OS === 'ios'
+								? focused
+									? 'ios-heart'
+									: 'ios-heart-empty'
+								: focused
+								? 'md-heart'
+								: 'md-heart-empty'
+						}
+					/>
 				)
 			}
 		},
@@ -73,15 +93,21 @@ export default createBottomTabNavigator(
 				title: 'Profile'
 			}),
 			navigationOptions: {
-				tabBarIcon: (
-					<NavIcon name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'} />
+				tabBarIcon: ({ focused }) => (
+					<NavIcon
+						focused={focused}
+						name={Platform.OS === 'ios' ? 'ios-person' : 'md-person'}
+					/>
 				)
 			}
 		}
 	},
 	{
 		tabBarOptions: {
-			showLabel: false
+			showLabel: false,
+			tabStyle: {
+				backgroundColor: '#EFEEEF'
+			}
 		}
 	}
 );
