@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Image, Platform } from 'react-native';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { Ionicons } from '@expo/vector-icons';
 import Swiper from 'react-native-swiper';
 import constants from '../constants';
+import { gql } from 'apollo-boost';
+import styles from '../styles';
+import { useMutation } from 'react-apollo-hooks';
 
-const Container = styled.View``;
+export const TOGGLE_LIKE = gql`
+	mutation toggelLike($postId: String!) {
+		toggleLike(postId: $postId)
+	}
+`;
+
+const Container = styled.View`
+	margin-bottom: 40px;
+`;
 
 const Header = styled.View`
 	padding: 15px;
@@ -42,7 +53,7 @@ const InfoContainer = styled.View`
 `;
 
 const Caption = styled.Text`
-	margin: 3px 0px;
+	margin: 5px 0px;
 `;
 
 const CommentCount = styled.Text`
@@ -51,13 +62,33 @@ const CommentCount = styled.Text`
 `;
 
 const Post = ({
+	id,
 	user,
 	location,
 	files = [],
-	likeCount,
+	likeCount: likeCountProp,
 	caption,
-	comments = []
+	comments = [],
+	isLiked: isLikedProp
 }) => {
+	const [isLiked, setIsLiked] = useState(isLikedProp);
+	const [likeCount, setLikeCount] = useState(likeCountProp);
+	const [toggleLikeMutation] = useMutation(TOGGLE_LIKE, {
+		variables: {
+			postId: id
+		}
+	});
+	const handleLike = async () => {
+		if (isLiked === true) {
+			setLikeCount(l => l - 1);
+		} else {
+			setLikeCount(l => l + 1);
+		}
+		setIsLiked(p => !p);
+		try {
+			await toggleLikeMutation();
+		} catch (error) {}
+	};
 	return (
 		<Container>
 			<Header>
@@ -89,12 +120,19 @@ const Post = ({
 			</Swiper>
 			<InfoContainer>
 				<IconsContainer>
-					<Touchable>
+					<Touchable onPress={handleLike}>
 						<IconContainer>
 							<Ionicons
-								size={28}
+								size={24}
+								color={isLiked ? styles.redColor : styles.blackColor}
 								name={
-									Platform.OS === 'ios' ? 'ios-heart-empty' : 'md-heart-empty'
+									Platform.OS === 'ios'
+										? isLiked
+											? 'ios-heart'
+											: 'ios-heart-empty'
+										: isLiked
+										? 'md-heart'
+										: 'md-heart-empty'
 								}
 							/>
 						</IconContainer>
@@ -102,7 +140,8 @@ const Post = ({
 					<Touchable>
 						<IconContainer>
 							<Ionicons
-								size={28}
+								size={24}
+								color={styles.blackColor}
 								name={Platform.OS === 'ios' ? 'ios-text' : 'md-text'}
 							/>
 						</IconContainer>
