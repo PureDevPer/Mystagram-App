@@ -2205,7 +2205,12 @@ expo-location@~6.0.0:
   dependencies:
     invariant "^2.2.4"
 
-expo-permissions@~6.0.0:
+expo-media-library@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/expo-media-library/-/expo-media-library-6.0.0.tgz#e1e818a9a93ea01edf57890cea8cde91358eae76"
+  integrity sha512-jAdsYdWc7xxC8D0gwYY782wMoR9hefoOLkRU64ELoyB8nuDrWF008bUqpqGNsXLxgXlvhA/Kpo3zncS+9IgvWw==
+
+expo-permissions@^6.0.0, expo-permissions@~6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-6.0.0.tgz#2943f1aa98de833b88cea73cf03d18d08957cb68"
   integrity sha512-O+RdyfGiq7i+5Vi9fE38DgKn436lNWiqhnS5/Z7CC00bmKahhjVMNDbZvNn/nrdRGyaPneJk1Co1s1sexSnv0A==

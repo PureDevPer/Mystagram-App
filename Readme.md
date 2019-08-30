@@ -24,3 +24,5 @@ Screens:
 - Expo - Icons: https://docs.expo.io/versions/latest/guides/icons/
 - Expo icons: https://expo.github.io/vector-icons/
 - React Native Swiper: https://github.com/leecade/react-native-swiper
+- Media Libary: https://docs.expo.io/versions/latest/sdk/media-library/
+- Permissions: https://docs.expo.io/versions/latest/sdk/permissions/
