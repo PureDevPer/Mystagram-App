@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Camera } from 'expo';
+import { Camera } from 'expo-camera';
+import * as Permissions from 'expo-permissions';
 import constants from '../../constants';
 import Loader from '../../components/Loader';
 
