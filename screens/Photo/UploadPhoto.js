@@ -64,12 +64,18 @@ export default ({ navigation }) => {
 	const handleSubmit = async () => {
 		if (captionInput.value === '' && locationInput.value === '') {
 			Alert.alert('All fileds are required');
+			setIsLoading(false);
 		}
 		if (captionInput.value === '' && locationInput.value !== '') {
 			Alert.alert('Caption filed is required');
+			setIsLoading(false);
 		}
 		if (captionInput.value !== '' && locationInput.value === '') {
 			Alert.alert('Location filed is required');
+			setIsLoading(false);
+		}
+		if (captionInput.value !== '' && locationInput.value !== '') {
+			setIsLoading(true);
 		}
 		const formData = new FormData();
 		const name = photo.filename;
@@ -80,7 +86,7 @@ export default ({ navigation }) => {
 			uri: photo.uri
 		});
 		try {
-			setIsLoading(true);
+			// setIsLoading(true);
 			const {
 				data: { location }
 			} = await axios.post('http://localhost:4000/api/upload', formData, {
