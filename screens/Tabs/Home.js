@@ -1,25 +1,19 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import Loader from '../../components/Loader';
-import { gql } from 'apollo-boost';
-import { useQuery } from 'react-apollo-hooks';
 import { ScrollView, RefreshControl } from 'react-native';
+import styled from 'styled-components';
+import { gql } from 'apollo-boost';
+import Loader from '../../components/Loader';
+import { useQuery } from 'react-apollo-hooks';
 import Post from '../../components/Post';
 import { POST_FRAGMENT } from '../../fragments';
 
-const FEED_QUERY = gql`
+export const FEED_QUERY = gql`
 	{
 		seeFeed {
 			...PostParts
 		}
 	}
 	${POST_FRAGMENT}
-`;
-
-const View = styled.View`
-	justify-content: center;
-	align-items: center;
-	flex: 1;
 `;
 
 export default () => {
@@ -29,8 +23,8 @@ export default () => {
 		try {
 			setRefreshing(true);
 			await refetch();
-		} catch (error) {
-			console.log(error);
+		} catch (e) {
+			console.log(e);
 		} finally {
 			setRefreshing(false);
 		}
