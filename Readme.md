@@ -31,6 +31,10 @@ MystaGram using React Native (iOS / Android)
 - [x] Photo Detail
 - [x] Photo Comments
 - [x] Photo Likes
+- [x] Sign Up
+  - [x] Google
+  - [x] Facebook
+- [x] Login
 
 ## Reading
 
